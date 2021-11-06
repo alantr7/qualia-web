@@ -1,0 +1,52 @@
+.sidebar {
+  width: 300px;
+  height: 100%;
+  display: block;
+  position: fixed;
+  background-color: #F5F5F5;
+
+  .logo {
+    font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    padding: 24px;
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 8px;
+    width: 156px;
+    cursor: pointer;
+
+    &.createNew {
+      background-color: #5785FB;
+      color: white;
+      border: 0;
+      border-radius: 8px;
+    }
+  }
+
+  .storageUsed {
+    position: absolute;
+    width: 172px;
+    bottom: 64px;
+    left: 56px;
+
+    p {
+      font-size: 12px;
+      font-weight: bold;
+      padding-bottom: 2px;
+    }
+    div {
+      padding: 2px;
+      background-color: #C4C4C4;
+
+      a {
+        display: block;
+        background-color: #5785FB;
+        height: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+#search {
+  margin-left: 324px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border: 0;
+  padding: 12px 8px;
+  outline: 0;
+  width: 640px;
+  background-color: #F5F5F5;
+}
+.actions {
+  margin-left: 324px;
+  margin-bottom: 16px;
+  button {
+    padding: 10px;
+    width: 150px;
+    margin-right: 8px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    //border: 0;
+    cursor: pointer;
+
+    &.buttonUpload {
+      background-color: #5785FB;
+      color: white;
+    }
+  }
+}
+.files {
+  margin-left: 324px;
+  width: calc(100% - 348px);
+  font-size: 15px;
+  border-spacing: 0 1px;
+
+  thead tr {
+    text-align: left;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+
+    th {
+      cursor: pointer;
+      padding: 8px;
+      font-weight: bold;
+
+      &:first-child {
+        padding-left: 0;
+      }
+    }
+  }
+  tbody tr {
+    // box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+    &:hover {
+      background-color: rgba(0, 0, 0, .05);
+    }
+    td {
+      padding: 10px;
+      cursor: default;
+    }
+    td:first-child {
+      padding-left: 40px;
+    }
+    &.directory {
+      background-size: 20px;
+      background-position: 12px 8px;
+      background-repeat: no-repeat;
+      background-image: url('/images/folder-7-32.png');
+    }
+    &.selected {
+      background-color: #DCE8FF;
+    }
+  }
+}
