@@ -1,0 +1,144 @@
+#search {
+  margin-left: 324px;
+  margin-top: 26px;
+  margin-bottom: 16px;
+  border: 0;
+  padding: 18px 20px;
+  outline: 0;
+  border-radius: 12px;
+  width: 640px;
+  font-size: 17px;
+  background-color: #F5F5F5;
+}
+#search::placeholder {
+  color: #B5B5B5;
+}
+
+.filesSectionContainer {
+  width: calc(100% - 324px);
+  margin-left: 324px;
+  display: flex;
+  height: calc(100% - 56px);
+}
+
+.filesSection {
+  flex: auto;
+}
+
+.pathActionsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.pathActionsContainer .path {
+  flex: auto;
+}
+.pathActionsContainer .path button {
+  padding: 8px 20px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.pathActionsContainer .path button:first-child {
+  background-color: #5785FB;
+  color: white;
+}
+.pathActionsContainer .actions {
+  margin-bottom: 16px;
+  align-self: flex-end;
+  flex: none;
+}
+.pathActionsContainer .actions button {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  margin: 0 2px;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: white;
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+.pathActionsContainer .actions button:hover {
+  background-color: #F5F5F5;
+}
+.pathActionsContainer .actions button:active {
+  background-color: #e3e3e3;
+}
+.pathActionsContainer .actions button.btnUpload {
+  background-image: url("/images/upload-3-48.png");
+}
+.pathActionsContainer .actions button.btnCreateFile {
+  background-image: url("/images/add-file-48.png");
+}
+.pathActionsContainer .actions button.btnCreateFolder {
+  background-image: url("/images/add-folder-48.png");
+}
+.pathActionsContainer .actions button.btnDelete {
+  background-image: url("/images/upload-3-48.png");
+}
+.pathActionsContainer .actions button.btnDetails {
+  background-image: url("/images/info-48.png");
+}
+.pathActionsContainer .actions button.btnDetails.btnDetailsActive {
+  background-image: url("/images/info-48-active.png");
+}
+.pathActionsContainer .actions .btnGroup {
+  display: inline-block;
+  height: 36px;
+  border: 1px solid #C4C4C4;
+  border-width: 0 1px 0 0;
+  padding: 2px 8px;
+}
+.pathActionsContainer .actions .btnGroup:first-child {
+  border-width: 0 1px 0 1px;
+}
+
+.files {
+  width: 100%;
+  font-size: 15px;
+  border-spacing: 0 1px;
+}
+.files thead tr {
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.files thead tr th {
+  cursor: pointer;
+  padding: 8px;
+  font-weight: bold;
+  color: #646464;
+}
+.files thead tr th:first-child {
+  padding-left: 0;
+}
+.files tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.files tbody tr td {
+  padding: 10px;
+  cursor: default;
+}
+.files tbody tr td:not(.files tbody tr td:first-child) {
+  width: 128px;
+}
+.files tbody tr td:first-child {
+  padding-left: 40px;
+}
+.files tbody tr.directory {
+  background-size: 20px;
+  background-position: 12px 8px;
+  background-repeat: no-repeat;
+  background-image: url("/images/folder-7-32.png");
+}
+.files tbody tr.selected {
+  background-color: #DCE8FF;
+}
+
+/*# sourceMappingURL=DriveContents.module.css.map */

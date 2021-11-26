@@ -14,8 +14,22 @@ export default class DriveSidebar extends React.Component<any , any> {
             <div className={style.sidebar}>
                 <p className={style.logo}>Drive</p>
 
-                <button className={style.createNew}>Create New</button>
-
+                <div className={style.quickAccess}>
+                    <p className={style.title}>Quick Access</p>
+                    <div>
+                        <p>I</p>
+                        <p>Files</p>
+                    </div>
+                    <div>
+                        <p>I</p>
+                        <p>Files</p>
+                    </div>
+                    <div>
+                        <p>I</p>
+                        <p>Files</p>
+                    </div>
+                </div>
+                <div className={style.separator} />
                 <div className={style.storageUsed}>
                     <p>Using 30.6GB of 50GB</p>
                     <div>

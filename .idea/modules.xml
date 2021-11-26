@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/qualia-ui.iml" filepath="$PROJECT_DIR$/.idea/qualia-ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/qualia-web.iml" filepath="$PROJECT_DIR$/.idea/qualia-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../qualia-web-setup/.idea/qualia-web-setup.iml" filepath="$PROJECT_DIR$/../qualia-web-setup/.idea/qualia-web-setup.iml" />
+    </modules>
+  </component>
+</project>

@@ -2,6 +2,7 @@ import {NextFetchEvent, NextRequest, NextResponse} from "next/server";
 import {SessionWrapper} from "../utils/session-wrapper";
 import {getUser} from "../lib/get-user";
 
+
 export default async function middleware(req: NextRequest, evt: NextFetchEvent) {
 
     let res = NextResponse.next();

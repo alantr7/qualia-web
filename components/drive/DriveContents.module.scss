@@ -1,33 +1,113 @@
 #search {
   margin-left: 324px;
-  margin-top: 16px;
+  margin-top: 26px;
   margin-bottom: 16px;
   border: 0;
-  padding: 12px 8px;
+  padding: 18px 20px;
   outline: 0;
+  border-radius: 12px;
   width: 640px;
+  font-size: 17px;
   background-color: #F5F5F5;
-}
-.actions {
-  margin-left: 324px;
-  margin-bottom: 16px;
-  button {
-    padding: 10px;
-    width: 150px;
-    margin-right: 8px;
-    border: 1px solid rgba(0, 0, 0, .1);
-    //border: 0;
-    cursor: pointer;
 
-    &.buttonUpload {
-      background-color: #5785FB;
-      color: white;
+  &::placeholder {
+    color: #B5B5B5;
+  }
+}
+
+.filesSectionContainer {
+  width: calc(100% - 324px);
+  margin-left: 324px;
+  display: flex;
+  height: calc(100% - 56px);
+}
+.filesSection {
+  flex: auto;
+}
+.pathActionsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .path {
+    flex: auto;
+    button {
+      padding: 8px 20px;
+      margin-right: 8px;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-family: 'Nunito Sans', sans-serif;
+
+      &:first-child {
+        background-color: #5785FB;
+        color: white;
+      }
+    }
+  }
+
+  .actions {
+    margin-bottom: 16px;
+    align-self: flex-end;
+    flex:  none;
+
+    button {
+      padding: 8px;
+      width: 36px;
+      height: 36px;
+      margin: 0 2px;
+      border: 0;
+      cursor: pointer;
+      overflow: hidden;
+      background-color: white;
+      background-position: center;
+      background-size: 24px;
+      background-repeat: no-repeat;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #F5F5F5;
+      }
+      &:active {
+        background-color: #e3e3e3;
+      }
+
+      &.btnUpload {
+        background-image: url('/images/upload-3-48.png');
+      }
+      &.btnCreateFile {
+        background-image: url('/images/add-file-48.png');
+      }
+      &.btnCreateFolder {
+        background-image: url('/images/add-folder-48.png');
+      }
+      &.btnDelete {
+        background-image: url('/images/upload-3-48.png');
+      }
+      &.btnDetails {
+        background-image: url('/images/info-48.png');
+        &.btnDetailsActive {
+          background-image: url('/images/info-48-active.png');
+        }
+      }
+    }
+
+    .btnGroup {
+      display: inline-block;
+      height: 36px;
+      border: 1px solid #C4C4C4;
+      border-width: 0 1px 0 0;
+      padding: 2px 8px;
+      &:first-child {
+        border-width: 0 1px 0 1px;
+      }
     }
   }
 }
+
 .files {
-  margin-left: 324px;
-  width: calc(100% - 348px);
+  width: 100%;
   font-size: 15px;
   border-spacing: 0 1px;
 
@@ -39,30 +119,40 @@
       cursor: pointer;
       padding: 8px;
       font-weight: bold;
+      color: rgb(100, 100, 100);
 
       &:first-child {
         padding-left: 0;
       }
     }
   }
+
   tbody tr {
     // box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
     &:hover {
       background-color: rgba(0, 0, 0, .05);
     }
+
     td {
       padding: 10px;
       cursor: default;
+
+      &:not(&:first-child) {
+        width: 128px;
+      }
     }
+
     td:first-child {
       padding-left: 40px;
     }
+
     &.directory {
       background-size: 20px;
       background-position: 12px 8px;
       background-repeat: no-repeat;
       background-image: url('/images/folder-7-32.png');
     }
+
     &.selected {
       background-color: #DCE8FF;
     }

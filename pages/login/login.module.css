@@ -1,0 +1,90 @@
+.loginForm {
+  position: absolute;
+  left: calc(50% - 180px);
+  top: calc(50% - 256px);
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 360px;
+  padding-top: 56px;
+  padding-bottom: 24px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.loginForm .profileAvatar {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.loginForm .loginText {
+  text-align: center;
+  color: #9A9A9A;
+  width: 100%;
+  margin-bottom: 32px;
+}
+.loginForm .inputRow {
+  display: table;
+  margin: 12px auto;
+}
+.loginForm .inputRow .icon {
+  float: left;
+  display: inline-block;
+  width: 48px;
+  height: 32px;
+  background-color: #393939;
+  background-position: center;
+  background-size: 45%;
+  background-repeat: no-repeat;
+}
+.loginForm .inputRow input[type=email], .loginForm .inputRow input[type=password] {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  border: 0;
+  padding: 8px;
+  width: 224px;
+  outline: 0;
+  transition: background-color 0.3s, color 0.3s;
+  color: black;
+}
+.loginForm .inputRow input[type=email]::placeholder, .loginForm .inputRow input[type=password]::placeholder {
+  color: #090909;
+}
+.loginForm .inputRow input[type=email]:focus, .loginForm .inputRow input[type=password]:focus {
+  background-color: #575757;
+  color: white;
+}
+.loginForm label[for=keep-session] {
+  color: #9A9A9A;
+  font-size: 12px;
+}
+.loginForm input[type=checkbox] {
+  background-color: #595959;
+  border: 1px solid black;
+}
+.loginForm .noAccount {
+  text-align: center;
+  font-size: 12px;
+  color: #9A9A9A;
+}
+.loginForm button {
+  background-color: #737373;
+  margin-top: 48px;
+  width: 100px;
+  padding: 8px;
+  border: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+  font-family: Arial;
+  font-size: 12px;
+}
+.loginForm button:hover {
+  background-color: #7a7a7a;
+}
+
+/*# sourceMappingURL=login.module.css.map */
