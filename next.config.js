@@ -12,5 +12,17 @@ module.exports = {
                 permanent: true
             }
         ]
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/api/:path*',
+                destination: 'http://localhost:25002/api/:path*'
+            },
+            {
+                source: '/auth/:path*',
+                destination: 'http://localhost:25002/auth/:path*'
+            }
+        ]
     }
 };

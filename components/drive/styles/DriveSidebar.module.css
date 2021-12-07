@@ -1,0 +1,135 @@
+.sidebar {
+  width: 300px;
+  height: 100%;
+  display: block;
+  position: fixed;
+  background-color: #F5F5F5;
+}
+.sidebar .logo {
+  font-weight: bold;
+  text-align: center;
+  font-size: 24px;
+  padding: 36px;
+}
+.sidebar button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 8px;
+  width: 156px;
+  cursor: pointer;
+}
+.sidebar button.createNew {
+  background-color: #5785FB;
+  color: white;
+  border: 0;
+  border-radius: 8px;
+}
+.sidebar .storageUsed {
+  position: absolute;
+  width: 172px;
+  bottom: 64px;
+  left: 56px;
+}
+.sidebar .storageUsed p {
+  font-size: 12px;
+  font-weight: bold;
+  padding-bottom: 2px;
+}
+.sidebar .storageUsed div {
+  padding: 2px;
+  background-color: #C4C4C4;
+}
+.sidebar .storageUsed div a {
+  display: block;
+  background-color: #5785FB;
+  height: 4px;
+}
+.sidebar .quickAccess {
+  width: 200px;
+  margin: 16px auto 0;
+}
+.sidebar .quickAccess .title {
+  font-weight: 800;
+  font-size: 16px;
+  padding-left: 16px;
+  margin-bottom: 4px;
+}
+.sidebar .quickAccessItem {
+  position: relative;
+  padding: 4px;
+  padding-left: 16px;
+}
+.sidebar .quickAccessItem a {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.sidebar .quickAccessItem a.iconFolder {
+  background-image: url(/images/folder-7-32-lightgray.png);
+}
+.sidebar .quickAccessItem p {
+  margin-left: 28px;
+}
+.sidebar .quickAccessItem:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.sidebar .quickAccessItem:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.sidebar .separator {
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #C4C4C4;
+  width: 75%;
+  margin: 8px auto;
+}
+.sidebar .navigation {
+  width: 200px;
+  margin: 16px auto 0;
+}
+.sidebar .navigation div {
+  margin: 6px 0;
+  padding: 8px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  border-radius: 8px;
+}
+.sidebar .navigation div a {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.sidebar .navigation div p {
+  margin-left: 36px;
+  font-size: 18px;
+  padding-top: 2px;
+}
+.sidebar .navigation div:nth-child(1) a {
+  background-image: url(/images/hard-drive-48.png);
+}
+.sidebar .navigation div:nth-child(2) a {
+  background-image: url(/images/window-apps-48.png);
+}
+.sidebar .navigation div:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.sidebar .navigation div:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.sidebar .navigation div.selected {
+  background-color: #5785FB;
+}
+.sidebar .navigation div.selected p {
+  color: white;
+}
+.sidebar .navigation div.selected a {
+  filter: brightness(0) invert(1);
+}
+
+/*# sourceMappingURL=DriveSidebar.module.css.map */

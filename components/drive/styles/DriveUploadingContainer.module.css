@@ -2,51 +2,52 @@
   position: fixed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
   width: 420px;
-  height: 60px;
   right: 32px;
   padding: 8px;
-  bottom: 32px;
-  transform: translateY(64px);
-  opacity: 0;
+  bottom: 64px;
   transition: transform 0.3s, opacity 0.3s;
 }
-.container.visible {
+.container .file {
+  position: relative;
+  height: 60px;
+}
+.container .file.visible {
   transform: translateY(0);
   opacity: 1;
 }
-.container .title {
+.container .file .title {
   float: left;
   width: 300px;
   margin-left: 64px;
   font-size: 17px;
   color: black;
 }
-.container .currentFile {
+.container .file .currentFile {
   float: left;
   margin-left: 64px;
   color: #555555;
   font-size: 14px;
 }
-.container .fileIcon {
+.container .file .fileIcon {
   position: absolute;
-  left: 14px;
-  top: 10px;
+  left: 10px;
+  top: 4px;
   width: 44px;
-  height: 56px;
+  height: 46px;
   background-color: #C4C4C4;
 }
-.container .percentage {
+.container .file .percentage {
   position: absolute;
   color: #3E3E3E;
   top: 12px;
   right: 16px;
   font-size: 24px;
 }
-.container .progressBarContainer {
+.container .file .progressBarContainer {
   float: left;
   margin-left: 64px;
 }
-.container .progressBarContainer .progressBarBackground {
+.container .file .progressBarContainer .progressBarBackground {
   position: relative;
   display: block;
   width: 348px;
@@ -54,7 +55,7 @@
   height: 4px;
   background-color: #C4C4C4;
 }
-.container .progressBarContainer .progressBar {
+.container .file .progressBarContainer .progressBar {
   background-color: #5785FB;
   display: block;
   width: 0;

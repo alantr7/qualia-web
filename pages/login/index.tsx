@@ -10,7 +10,7 @@ export default function Login(req, res) {
     const router = useRouter();
 
     function authorize() {
-        fetch('/api/v1/auth/login', {
+        fetch('/api/auth/login', {
             method: 'post',
             body: JSON.stringify({
                 email: email,

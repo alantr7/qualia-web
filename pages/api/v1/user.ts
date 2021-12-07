@@ -1,6 +1,5 @@
 import ApiRequest from "../../../utils/api-request";
 import {NextApiResponse} from "next";
-import {getUser} from "../../../lib/get-user";
 
 export default async (req: ApiRequest, res: NextApiResponse) => {
 

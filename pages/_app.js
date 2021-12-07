@@ -20,11 +20,11 @@ import React from "react";
 import '../styles/global.css';
 import DriveContents from "../components/drive/DriveContents";
 import DriveUploadingContainer from "../components/drive/DriveUploadingContainer";
+import DriveLayout from "../components/drive/DriveLayout";
 
 export default function app({Component, pageProps}) {
     const router = useRouter();
-    console.log(router);
-    if (router.pathname === '/drive') {
+    if (router.pathname === '/drive' || router.pathname === '/drive/folder/[folder]' || router.pathname === '/drive/applications') {
         return (
             <>
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -32,10 +32,9 @@ export default function app({Component, pageProps}) {
                 <link
                     href="https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Nunito+Sans&display=swap"
                     rel="stylesheet"/>
-                <DriveSidebar />
-                <DriveContents />
+                <DriveLayout {...pageProps} component={Component} />;
             </>
-        )
+        );
     }
     return (
         <>

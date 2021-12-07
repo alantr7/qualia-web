@@ -15,10 +15,12 @@
 }
 
 .filesSectionContainer {
-  width: calc(100% - 324px);
+  position: fixed;
+  width: calc(100% - 348px);
   margin-left: 324px;
   display: flex;
-  height: calc(100% - 56px);
+  height: calc(100% - 128px);
+  overflow-y: auto;
 }
 
 .filesSection {
@@ -71,6 +73,9 @@
 .pathActionsContainer .actions button:active {
   background-color: #e3e3e3;
 }
+.pathActionsContainer .actions button.btnDownload {
+  background-image: url("/images/downloading-updates-48.png");
+}
 .pathActionsContainer .actions button.btnUpload {
   background-image: url("/images/upload-3-48.png");
 }
@@ -100,6 +105,67 @@
   border-width: 0 1px 0 1px;
 }
 
+.filesDnD {
+  position: absolute;
+  display: table;
+  left: 0;
+  top: 94px;
+  width: 100%;
+  height: calc(100% - 94px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.filesDnD p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fileContext {
+  position: fixed;
+  padding: 8px 0;
+  border: 1px solid #C5C5C5;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  background-color: white;
+  z-index: 1;
+}
+.fileContext .fileContextItem {
+  padding: 6px 8px;
+  padding-left: 56px;
+  width: 240px;
+  background-size: 14px;
+  background-position: 24px center;
+  background-repeat: no-repeat;
+}
+.fileContext .fileContextItem:hover {
+  background-color: #F5F5F5;
+}
+.fileContext .fileContextItem:active {
+  background-color: #e3e3e3;
+}
+.fileContext .fileContextItem.contextDownload {
+  background-image: url(/images/data-transfer-download-32.png);
+}
+.fileContext .fileContextItem.contextShare {
+  background-image: url(/images/sharethis-32.png);
+}
+.fileContext .fileContextItem.contextRename {
+  background-image: url(/images/rename-32.png);
+}
+.fileContext .fileContextItem.contextQuickAccessAdd {
+  background-image: url(/images/star-5-32.png);
+}
+.fileContext .fileContextItem.contextQuickAccessRemove {
+  background-image: url(/images/star-2-32.png);
+}
+.fileContext .fileContextItem.contextDelete {
+  background-image: url(/images/trash-6-32.png);
+}
+.fileContext hr {
+  width: 100%;
+}
+
 .files {
   width: 100%;
   font-size: 15px;
@@ -121,12 +187,47 @@
 .files tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+.files tbody tr:active {
+  background-color: #e3e3e3;
+}
 .files tbody tr td {
   padding: 10px;
   cursor: default;
+  white-space: nowrap;
 }
 .files tbody tr td:not(.files tbody tr td:first-child) {
   width: 128px;
+}
+.files tbody tr td p {
+  display: inline-block;
+  position: relative;
+}
+.files tbody tr td p input {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  border: 0;
+  font-size: 15px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.files tbody tr td.fileRenaming input {
+  outline: 1px solid black;
+  padding: 4px;
+  left: -4px;
+  top: -4px;
+}
+.files tbody tr td.fileRenaming pre:nth-child(2) {
+  padding-left: 4px;
+}
+.files tbody tr td input, .files tbody tr td pre {
+  min-width: 20px;
+}
+.files tbody tr td pre {
+  font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  display: inline-block;
 }
 .files tbody tr td:first-child {
   padding-left: 40px;
