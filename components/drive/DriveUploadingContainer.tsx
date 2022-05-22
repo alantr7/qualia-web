@@ -1,29 +1,64 @@
-import React, {useEffect, useState} from "react";
-import style from './DriveUploadingContainer.module.css';
+import React, {ReactElement, useEffect, useState} from "react";
+import style from './styles/DriveUploadingContainer.module.css';
 import Link from "next/link";
-import {useRouter, withRouter} from "next/router";
-import {router} from "next/client";
 import {file} from "@babel/types";
+import {withRouter} from "next/router";
+import DriveUploadingFile from "./DriveUploadingFile";
 
-type State = {
-    uploads: File[];
-    name: string;
-    progress: number;
-    visible: boolean
+type Props = {
+    uploads: DriveUploadingFile[]
+    router,
+    uploadedCount: number,
+    clearUploads(): void,
+    refreshfn(): void,
+    addFileUpload(file: ReactElement): void,
+    setUploadedFilesCount(c: (c: number) => number): void
 }
 
-export default withRouter(class DriveUploadingContainer extends React.Component<any, State> {
+type State = {
+    name: string;
+    progress: number;
+    minimized: boolean;
+    visible: boolean;
+    closed: boolean;
+    time: number
+}
+
+export default withRouter(class DriveUploadingContainer extends React.Component<Props, State> {
 
     constructor(props) {
         super(props);
         this.render = this.render.bind(this);
         this.upload = this.upload.bind(this);
+        this.uploadFile = this.uploadFile.bind(this);
         this.state = {
-            uploads: [],
             name: '',
             progress: 0,
-            visible: false
+            minimized: false,
+            time: 0,
+            visible: false,
+            closed: false
         };
+    }
+
+    uploadFile(file: File) {
+        const upload = (
+            <DriveUploadingFile
+                key={Date.now()}
+                onFileUploaded={() => {
+                    this.props.refreshfn();
+                    this.props.setUploadedFilesCount(c => c + 1);
+                }}
+                onFileProgress={(loaded, total) => {
+                    this.setState({
+                        progress: Math.floor(loaded / total * 100)
+                    });
+                }}
+                file={file}
+                path={`/api/v1/drive/files/${this.props.router.query.folder ? this.props.router.query.folder : 'root'}`}/>);
+
+        this.props.addFileUpload(upload);
+        console.log(file);
     }
 
     upload() {
@@ -35,59 +70,49 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
         fileInput.onchange = (e) => {
             // @ts-ignore
             const file = e.target.files[0] as File;
-
-            this.setState({
-                uploads: [
-                    ...this.state.uploads
-                ],
-                name: file.name,
-                visible: true
-            });
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('post', '/api/v1/user/drive?path=' + (this.props.router.query.path ? this.props.router.query.path : ''));
-
-            const fd = new FormData();
-            fd.append('file', file);
-            fd.append('overwrite', 'true');
-
-            xhr.onprogress = ({loaded, total}) => {
-                this.setState({
-                    progress: Math.floor(loaded / total * 100)
-                });
-            };
-
-            xhr.onloadend = () => {
-                this.props.refreshfn();
-                setTimeout(() => {
-                    this.setState({
-                        visible: false
-                    })
-                }, 2000);
-            };
-
-            xhr.send(fd);
-            console.log(file);
+            this.uploadFile(file);
         };
 
         document.getElementById('uploading-files').append(fileInput);
         fileInput.click();
     }
 
-    render() {
+    closeContainer = () => {
+        this.props.clearUploads();
+        this.setState({
+            closed: true
+        });
+    };
 
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
+        if (this.props.uploads.length > 0 && (!prevState.visible || prevState.closed)) {
+            this.setState({
+                visible: true,
+                closed: false
+            })
+        }
+    }
+
+    render() {
+        const isUploadCompleted = this.props.uploadedCount === this.props.uploads.length;
         return (
             <>
-                <div id="uploading-files" style={{display: "none"}} onClick={this.upload} />
-                <div className={style.container + ' ' + (this.state.visible ? style.visible : '')}>
-                    <div className={style.fileIcon}/>
-                    <p className={style.title}>Uploading file...</p>
-                    <p className={style.currentFile}>{this.state.name}</p>
-                    <p className={style.percentage}>{this.state.progress}%</p>
-                    <div className={style.progressBarContainer}>
-                        <div className={style.progressBarBackground}>
-                            <a className={style.progressBar} style={{width: this.state.progress + '%'}}/>
-                        </div>
+                <div id="uploading-files" style={{display: "none"}} onClick={this.upload}/>
+                <div
+                    className={style.container + ' ' + (this.state.visible ? style.visible : '') + ' ' + (this.state.closed ? style.closed : '') + ' ' + (this.state.minimized ? style.minimized : '')}>
+                    <p className={style.containerTitle} onClick={_ => this.setState({
+                        minimized: !this.state.minimized
+                    })}>
+                        {!isUploadCompleted && `Uploading files... (${this.props.uploadedCount} of ${this.props.uploads.length})`}
+                        {isUploadCompleted && `All files are uploaded (${this.props.uploadedCount})`}
+
+                        {isUploadCompleted && <span className={style.closeContainer} onClick={e => {
+                            e.stopPropagation();
+                            this.closeContainer();
+                        }} />}
+                    </p>
+                    <div className={style.uploads}>
+                        {this.props.uploads.map(a => a)}
                     </div>
                 </div>
             </>

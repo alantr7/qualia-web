@@ -1,0 +1,265 @@
+@charset "UTF-8";
+#search {
+  margin-left: 324px;
+  margin-top: 26px;
+  margin-bottom: 16px;
+  border: 0;
+  padding: 18px 20px;
+  outline: 0;
+  border-radius: 12px;
+  width: 640px;
+  font-size: 17px;
+  background-color: #F5F5F5;
+}
+#search::placeholder {
+  color: #B5B5B5;
+}
+
+.filesSectionContainer {
+  position: fixed;
+  width: calc(100% - 348px);
+  margin-left: 324px;
+  display: flex;
+  height: calc(100% - 128px);
+  overflow-y: auto;
+}
+
+.filesSection {
+  flex: auto;
+  width: calc(100% - 348px);
+}
+
+.pathActionsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.pathActionsContainer .path {
+  flex: auto;
+  white-space: nowrap;
+  overflow: auto;
+}
+.pathActionsContainer .path button {
+  padding: 8px 20px;
+  margin-right: 8px;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.pathActionsContainer .path button:last-child {
+  background-color: #5785FB !important;
+  color: white;
+}
+.pathActionsContainer .path button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.pathActionsContainer .path button:active {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.pathActionsContainer .path::-webkit-scrollbar {
+  height: 4px;
+  /* height of horizontal scrollbar ← You're missing this */
+}
+.pathActionsContainer .actions {
+  margin-bottom: 16px;
+  align-self: flex-end;
+  flex: none;
+}
+.pathActionsContainer .actions button {
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+  margin: 0 2px;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: white;
+  background-position: center;
+  background-size: 24px;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+}
+.pathActionsContainer .actions button:hover {
+  background-color: #F5F5F5;
+}
+.pathActionsContainer .actions button:active {
+  background-color: #e3e3e3;
+}
+.pathActionsContainer .actions button.btnDownload {
+  background-image: url("/images/downloading-updates-48.png");
+}
+.pathActionsContainer .actions button.btnUpload {
+  background-image: url("/images/upload-3-48.png");
+}
+.pathActionsContainer .actions button.btnCreateFile {
+  background-image: url("/images/add-file-48.png");
+}
+.pathActionsContainer .actions button.btnCreateFolder {
+  background-image: url("/images/add-folder-48.png");
+}
+.pathActionsContainer .actions button.btnDelete {
+  background-image: url("/images/upload-3-48.png");
+}
+.pathActionsContainer .actions button.btnDetails {
+  background-image: url("/images/info-48.png");
+}
+.pathActionsContainer .actions button.btnDetails.btnDetailsActive {
+  background-image: url("/images/info-48-active.png");
+}
+.pathActionsContainer .actions .btnGroup {
+  display: inline-block;
+  height: 36px;
+  border: 1px solid #C4C4C4;
+  border-width: 0 1px 0 0;
+  padding: 2px 8px;
+}
+.pathActionsContainer .actions .btnGroup:first-child {
+  border-width: 0 1px 0 1px;
+}
+
+.filesDnD {
+  position: absolute;
+  display: table;
+  left: 0;
+  top: 94px;
+  width: 100%;
+  height: calc(100% - 94px);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.filesDnD p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.fileContext {
+  position: fixed;
+  padding: 8px 0;
+  border: 1px solid #C5C5C5;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  background-color: white;
+  z-index: 1;
+}
+.fileContext .fileContextItem {
+  padding: 6px 8px;
+  padding-left: 56px;
+  width: 240px;
+  background-size: 14px;
+  background-position: 24px center;
+  background-repeat: no-repeat;
+}
+.fileContext .fileContextItem:hover {
+  background-color: #F5F5F5;
+}
+.fileContext .fileContextItem:active {
+  background-color: #e3e3e3;
+}
+.fileContext .fileContextItem.contextDownload {
+  background-image: url(/images/data-transfer-download-32.png);
+}
+.fileContext .fileContextItem.contextShare {
+  background-image: url(/images/sharethis-32.png);
+}
+.fileContext .fileContextItem.contextRename {
+  background-image: url(/images/rename-32.png);
+}
+.fileContext .fileContextItem.contextQuickAccessAdd {
+  background-image: url(/images/star-5-32.png);
+}
+.fileContext .fileContextItem.contextQuickAccessRemove {
+  background-image: url(/images/star-2-32.png);
+}
+.fileContext .fileContextItem.contextDelete {
+  background-image: url(/images/trash-6-32.png);
+}
+.fileContext hr {
+  width: 100%;
+}
+
+.files {
+  width: 100%;
+  font-size: 15px;
+  border-spacing: 0 1px;
+}
+.files thead tr {
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.files thead tr th {
+  cursor: pointer;
+  padding: 8px;
+  font-weight: bold;
+  color: #646464;
+}
+.files thead tr th:first-child {
+  padding-left: 0;
+}
+.files tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.files tbody tr:active {
+  background-color: #e3e3e3;
+}
+.files tbody tr td {
+  padding: 8px;
+  cursor: default;
+  white-space: nowrap;
+}
+.files tbody tr td:not(.files tbody tr td:first-child) {
+  width: 128px;
+}
+.files tbody tr td p {
+  display: inline-block;
+  position: relative;
+}
+.files tbody tr td p input {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding: 0;
+  border: 0;
+  font-size: 15px;
+  font-family: "Nunito Sans", sans-serif;
+}
+.files tbody tr td.fileRenaming input {
+  outline: 1px solid black;
+  padding: 4px;
+  left: -4px;
+  top: -4px;
+}
+.files tbody tr td.fileRenaming pre:nth-child(2) {
+  padding-left: 4px;
+}
+.files tbody tr td input, .files tbody tr td pre {
+  min-width: 20px;
+}
+.files tbody tr td pre {
+  font-family: "Nunito Sans", sans-serif;
+  margin: 0;
+  display: inline-block;
+}
+.files tbody tr td:first-child {
+  padding-left: 40px;
+}
+.files tbody tr.directory {
+  background-size: 20px;
+  background-position: 12px 8px;
+  background-repeat: no-repeat;
+  background-image: url("/images/folder-7-32.png");
+}
+.files tbody tr.selected {
+  background-color: #DCE8FF;
+}
+
+.selectionRect {
+  position: absolute;
+  background-color: rgba(220, 232, 255, 0.4);
+  outline: 1px solid #8ab1ff;
+}
+
+/*# sourceMappingURL=DriveContents.module.css.map */

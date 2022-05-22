@@ -1,0 +1,143 @@
+.container {
+  position: fixed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+  width: 350px;
+  right: 32px;
+  bottom: 32px;
+  transition: transform 0.3s, opacity 0.3s, width 0.3s;
+  display: none;
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.container.closed {
+  animation: animContainerClose 0.3s forwards !important;
+}
+@keyframes animContainerClose {
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+.container .containerTitle {
+  color: #5785FB;
+  margin: 0;
+  background-color: white;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(87, 133, 251, 0.1);
+  font-weight: bold;
+}
+.container .containerTitle:hover {
+  background-color: #f8f8f8;
+}
+.container .containerTitle:active {
+  background-color: #eeeeee;
+}
+.container .containerTitle .closeContainer {
+  position: absolute;
+  right: 20px;
+  top: 11px;
+  display: block;
+  padding: 11px;
+  background-image: url(/images/x-mark-32.png);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.container .containerTitle .closeContainer:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.container .containerTitle .closeContainer:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.container.visible {
+  transform: translateY(0);
+  display: block;
+  animation: animContainerOpen 0.3s;
+}
+@keyframes animContainerOpen {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.container .uploads {
+  padding: 8px;
+  height: 420px;
+  overflow-y: auto;
+  background-color: white;
+  opacity: 1;
+  transition: height 0.2s ease-out, opacity 0.15s;
+}
+.container.minimized {
+  width: 400px;
+}
+.container.minimized .containerTitle {
+  text-align: left;
+  padding-left: 40px;
+}
+.container.minimized .uploads {
+  height: 0;
+  padding: 0;
+  opacity: 0;
+}
+.container .file {
+  position: relative;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.03);
+  margin: 4px 0;
+  border-radius: 8px;
+  padding: 4px;
+}
+.container .file:first-child {
+  margin-top: 0;
+}
+.container .file .title {
+  float: left;
+  margin-left: 54px;
+  font-size: 16px;
+  color: black;
+}
+.container .file .uploadProgress {
+  float: left;
+  margin-left: 54px;
+  font-size: 12px;
+  color: #6D6D6D;
+}
+.container .file .percentageContainer {
+  position: absolute;
+  color: #3E3E3E;
+  top: 6px;
+  left: 12px;
+  font-size: 14px;
+}
+.container .file .percentageContainer svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(-90deg);
+  stroke-dasharray: 251;
+  /* (2PI * 40px) */
+  stroke-dashoffset: 111;
+}
+.container .file .percentageContainer .percentage {
+  font-size: 12px;
+  z-index: 2;
+  width: 38px;
+  text-align: center;
+  padding-top: 11px;
+}
+
+/*# sourceMappingURL=DriveUploadingContainer.module.css.map */
