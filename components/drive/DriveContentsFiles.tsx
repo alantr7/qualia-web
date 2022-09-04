@@ -355,4 +355,4 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
             </div>
         );
     }
-});
+}
