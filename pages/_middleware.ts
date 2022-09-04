@@ -1,36 +1,42 @@
 import {NextFetchEvent, NextRequest, NextResponse} from "next/server";
-import {SessionWrapper} from "../utils/session-wrapper";
-import {getUser} from "../lib/get-user";
-
 
 export default async function middleware(req: NextRequest, evt: NextFetchEvent) {
-
+/*
     let res = NextResponse.next();
 
-    let sid = {
-        value: null
-    };
-
-    if (!await SessionWrapper.hasSession(req)) {
-        res = await SessionWrapper.createSession(req, res, sid);
+    if (req.nextUrl.pathname === '/sign-in') {
+        return res;
     }
-    else
-    {
-        sid.value = (await SessionWrapper.getSession(req)).sid;
+
+    const response = await fetch('/api/auth/get_user', {
+        headers: {
+            'Cookie': 'sid=' + req.cookies['sid']
+        }
+    });
+
+    res.headers.set('set-cookie', response.headers.get('set-cookie'));
+
+    if (response.status === 200) {
+        return res;
     }
 
     // Handle API authorization
     if (req.nextUrl.pathname.startsWith('/api/'))
     {
-
+        if (req.nextUrl.pathname.startsWith('/api/auth/*')) {
+            return res;
+        }
+        return NextResponse.redirect(`/login?return=${req.nextUrl.pathname}`);
     }
     else if (req.nextUrl.pathname !== '/login')
     {
-        if (!(await SessionWrapper.getSession(sid.value)).has('user')) {
+        if (response.status === 401) {
             return NextResponse.redirect(`/login?return=${req.nextUrl.pathname}`);
         }
     }
 
-    return res;
+    return res;*/
+
+    return NextResponse.next();
 
 }

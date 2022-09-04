@@ -11,6 +11,12 @@
   font-size: 17px;
   background-color: #F5F5F5;
 }
+#search::-moz-placeholder {
+  color: #B5B5B5;
+}
+#search:-ms-input-placeholder {
+  color: #B5B5B5;
+}
 #search::placeholder {
   color: #B5B5B5;
 }
@@ -40,8 +46,8 @@
   overflow: auto;
 }
 .pathActionsContainer .path button {
-  padding: 8px 20px;
   margin-right: 8px;
+  padding: 8px 16px;
   border: 0;
   border-radius: 10px;
   cursor: pointer;
@@ -51,6 +57,7 @@
 .pathActionsContainer .path button:last-child {
   background-color: #5785FB !important;
   color: white;
+  padding: 8px 16px;
 }
 .pathActionsContainer .path button:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -59,8 +66,7 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 .pathActionsContainer .path::-webkit-scrollbar {
-  height: 4px;
-  /* height of horizontal scrollbar ← You're missing this */
+  height: 4px; /* height of horizontal scrollbar ← You're missing this */
 }
 .pathActionsContainer .actions {
   margin-bottom: 16px;
@@ -88,25 +94,25 @@
   background-color: #e3e3e3;
 }
 .pathActionsContainer .actions button.btnDownload {
-  background-image: url("/images/downloading-updates-48.png");
+  background-image: url("../../../public/images/downloading-updates-48.png");
 }
 .pathActionsContainer .actions button.btnUpload {
-  background-image: url("/images/upload-3-48.png");
+  background-image: url("../../../public/images/upload-3-48.png");
 }
 .pathActionsContainer .actions button.btnCreateFile {
-  background-image: url("/images/add-file-48.png");
+  background-image: url("../../../public/images/add-file-48.png");
 }
 .pathActionsContainer .actions button.btnCreateFolder {
-  background-image: url("/images/add-folder-48.png");
+  background-image: url("../../../public/images/add-folder-48.png");
 }
 .pathActionsContainer .actions button.btnDelete {
-  background-image: url("/images/upload-3-48.png");
+  background-image: url("../../../public/images/upload-3-48.png");
 }
 .pathActionsContainer .actions button.btnDetails {
-  background-image: url("/images/info-48.png");
+  background-image: url("../../../public/images/info-48.png");
 }
 .pathActionsContainer .actions button.btnDetails.btnDetailsActive {
-  background-image: url("/images/info-48-active.png");
+  background-image: url("../../../public/images/info-48-active.png");
 }
 .pathActionsContainer .actions .btnGroup {
   display: inline-block;
@@ -159,22 +165,22 @@
   background-color: #e3e3e3;
 }
 .fileContext .fileContextItem.contextDownload {
-  background-image: url(/images/data-transfer-download-32.png);
+  background-image: url(../../../public/images/data-transfer-download-32.png);
 }
 .fileContext .fileContextItem.contextShare {
-  background-image: url(/images/sharethis-32.png);
+  background-image: url(../../../public/images/sharethis-32.png);
 }
 .fileContext .fileContextItem.contextRename {
-  background-image: url(/images/rename-32.png);
+  background-image: url(../../../public/images/rename-32.png);
 }
 .fileContext .fileContextItem.contextQuickAccessAdd {
-  background-image: url(/images/star-5-32.png);
+  background-image: url(../../../public/images/star-5-32.png);
 }
 .fileContext .fileContextItem.contextQuickAccessRemove {
-  background-image: url(/images/star-2-32.png);
+  background-image: url(../../../public/images/star-2-32.png);
 }
 .fileContext .fileContextItem.contextDelete {
-  background-image: url(/images/trash-6-32.png);
+  background-image: url(../../../public/images/trash-6-32.png);
 }
 .fileContext hr {
   width: 100%;
@@ -187,13 +193,13 @@
 }
 .files thead tr {
   text-align: left;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 #b8b8b8;
 }
 .files thead tr th {
   cursor: pointer;
   padding: 8px;
   font-weight: bold;
-  color: #646464;
+  color: rgb(100, 100, 100);
 }
 .files thead tr th:first-child {
   padding-left: 0;
@@ -250,7 +256,7 @@
   background-size: 20px;
   background-position: 12px 8px;
   background-repeat: no-repeat;
-  background-image: url("/images/folder-7-32.png");
+  background-image: url("../../../public/images/folder-7-32.png");
 }
 .files tbody tr.selected {
   background-color: #DCE8FF;
@@ -260,6 +266,4 @@
   position: absolute;
   background-color: rgba(220, 232, 255, 0.4);
   outline: 1px solid #8ab1ff;
-}
-
-/*# sourceMappingURL=DriveContents.module.css.map */
+}/*# sourceMappingURL=DriveContents.module.css.map */

@@ -55,7 +55,8 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
                     });
                 }}
                 file={file}
-                path={`/api/v1/drive/files/${this.props.router.query.folder ? this.props.router.query.folder : 'root'}`}/>);
+                parent={this.props.router.folder ? this.props.router.folder : 'root'}
+                path={`/api/v1/files`}/>);
 
         this.props.addFileUpload(upload);
         console.log(file);

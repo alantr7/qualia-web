@@ -48,6 +48,163 @@
       top: 11px;
       display: block;
       padding: 11px;
+      background-image: url(../../../public/images/x-mark-32.png);
+      background-size: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, .05);
+      }
+      &:active {
+        background-color: rgba(0, 0, 0, .1);
+      }
+    }
+  }
+
+  &.visible {
+    transform: translateY(0);
+    display: block;
+
+    animation: animContainerOpen .3s;
+  }
+
+  @keyframes animContainerOpen {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .uploads {
+    padding: 8px;
+    height: 420px;
+    overflow-y: auto;
+    background-color: white;
+    opacity: 1;
+    transition: height .2s ease-out, opacity .15s;
+  }
+
+  &.minimized {
+    width: 400px;
+    .containerTitle {
+      text-align: left;
+      padding-left: 40px;
+    }
+    .uploads {
+      height: 0;
+      padding: 0;
+      opacity: 0;
+    }
+  }
+
+  .file {
+    position: relative;
+    height: 40px;
+    background-color: rgba(0, 0, 0, .03);
+    margin: 4px 0;
+    border-radius: 8px;
+    padding: 4px;
+    &:first-child {
+      margin-top: 0;
+    }
+
+    .title {
+      float: left;
+      margin-left: 54px;
+      font-size: 16px;
+      color: black;
+    }
+    .uploadProgress {
+      float: left;
+      margin-left: 54px;
+      font-size: 12px;
+      color: #6D6D6D;
+    }
+
+    .percentageContainer {
+      position: absolute;
+      color: #3E3E3E;
+      top: 6px;
+      left: 12px;
+      font-size: 14px;
+
+      svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: rotate(-90deg);
+        stroke-dasharray: 251; /* (2PI * 40px) */
+        stroke-dashoffset: 111;
+      }
+
+      .percentage {
+        font-size: 12px;
+        z-index: 2;
+        width: 38px;
+        text-align: center;
+        padding-top: 11px;
+      }
+    }
+  }
+=======
+.container {
+  position: fixed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 25%);
+  width: 350px;
+  right: 32px;
+  bottom: 32px;
+  transition: transform .3s, opacity .3s, width .3s;
+  display: none;
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &.closed {
+    animation: animContainerClose .3s forwards !important;
+  }
+  
+  @keyframes animContainerClose {
+    40% {
+      opacity: 1;
+    }
+    100% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  .containerTitle {
+    color: #5785FB;
+    margin: 0;
+    background-color: white;
+    padding: 12px;
+    //padding-left: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(#5785FB, 0.1);
+    font-weight: bold;
+
+    &:hover {
+      background-color: rgb(248, 248, 248);
+    }
+    &:active {
+      background-color: rgb(238, 238, 238);
+    }
+
+    .closeContainer {
+      position: absolute;
+      right: 20px;
+      top: 11px;
+      display: block;
+      padding: 11px;
       background-image: url(/images/x-mark-32.png);
       background-size: 50%;
       background-repeat: no-repeat;

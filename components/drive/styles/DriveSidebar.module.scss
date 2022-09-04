@@ -4,6 +4,7 @@
   display: block;
   position: fixed;
   background-color: #F5F5F5;
+  box-shadow: 0 0 0 1px #DBDBDB;
 
   .logo {
     font-weight: bold;
@@ -73,7 +74,7 @@
       background-repeat: no-repeat;
       background-position: center;
       &.iconFolder {
-        background-image: url(/images/folder-7-32-lightgray.png);
+        background-image: url(../../../public/images/folder-7-32-lightgray.png);
       }
     }
     p {
@@ -120,12 +121,12 @@
       }
       &:nth-child(1) {
         a {
-          background-image: url(/images/hard-drive-48.png);
+          background-image: url(../../../public/images/hard-drive-48.png);
         }
       }
       &:nth-child(2) {
         a {
-          background-image: url(/images/window-apps-48.png);
+          background-image: url(../../../public/images/window-apps-48.png);
         }
       }
 

@@ -105,7 +105,9 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                 fileEntry.file(async (file: File) => {
                     this.props.addFileUpload(<DriveUploadingFile
                         key={Date.now()}
-                        path={`/api/v1/drive/files/${folder}`}
+                        // path={`/api/v1/files/${folder}`}
+                        path = {`/api/v1/files`}
+                        parent={folder}
                         file={file}
                         onFileUploaded={() => {
                             this.props.refreshfn();
@@ -116,15 +118,13 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                 });
             } else {
                 const directory = entry as FileSystemDirectoryEntry;
-                const folderJson = await (await fetch(`/api/v1/drive/files/${folder}`, {
+                const fd = new FormData();
+                fd.append('name', directory.name);
+                fd.append('type', 'folder');
+                fd.append('parent', folder);
+                const folderJson = await (await fetch(`/api/v1/files`, {
                     method: 'POST',
-                    body: JSON.stringify({
-                        name: directory.name,
-                        directory: true
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    body: fd
                 })).json();
                 directory.createReader().readEntries(async (entries) => {
                     for (let entry of entries) {
@@ -301,8 +301,6 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                             const isSelected = this.state.selection.elements.from !== -1 &&
                                 this.state.selection.elements.from <= index && this.state.selection.elements.to >= index;
 
-                            console.log(this.state.selection.elements.from);
-
                             return <DriveContentsItem
                                 key={object.id}
                                 id={object.id}
@@ -322,7 +320,7 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                                         await this.props.openDirectory(path);
                                 }}
                                 createContextMenu={this.createContextMenu}
-                                birth_time={object.birth_time}
+                                creation_time={object.creation_time}
                                 last_modified={object.last_modified}
                                 focus={() => {
                                     this.setState({
@@ -357,4 +355,4 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
             </div>
         );
     }
-});
+}

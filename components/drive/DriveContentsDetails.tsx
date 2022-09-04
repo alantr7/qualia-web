@@ -14,5 +14,4 @@ export default class DriveContentsDetails extends React.Component<any, any> {
             </div>
         );
     }
-
 }

@@ -10,15 +10,10 @@ export default function Login(req, res) {
     const router = useRouter();
 
     function authorize() {
-        fetch('/api/v1/auth/login', {
-            method: 'post',
-            body: JSON.stringify({
-                email: email,
-                password: password
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        fetch('/sign-in', {
+            method: 'POST',
+            body: `email=${email}&password=${password}`,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }).then(async r => {
             if (r.status === 200)
             {
