@@ -42,7 +42,7 @@ export default class DriveFileContextMenu extends React.Component<{
 
     render() {
         return (
-            <div className={style.fileContext} onClick={e => e.stopPropagation()}
+            <div className={style.fileContext} onMouseDown={e => e.stopPropagation()} onClick={e => e.stopPropagation()}
                  onContextMenu={e => e.preventDefault()}
                  style={{
                      left: `${this.props.x}px`,

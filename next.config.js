@@ -17,11 +17,12 @@ module.exports = {
         return [
             {
                 source: '/api/:path*',
-                destination: 'http://localhost:25002/api/:path*'
+                destination: 'http://194.99.22.39:9032/api/:path*'
+                // destination: 'http://localhost:9032/api/:path*'
             },
             {
-                source: '/auth/:path*',
-                destination: 'http://localhost:25002/auth/:path*'
+                source: '/auth',
+                destination: 'http://194.99.22.39:9032/auth'
             }
         ]
     }

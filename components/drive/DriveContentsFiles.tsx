@@ -13,11 +13,13 @@ type Props = {
     addFileUpload(file: ReactElement): void;
     focus(id: string);
     refreshfn(): void;
+    rename(id: string, name: string, isDirectory: boolean): void;
     download(id: string, extension: string): void;
     addToQuickAccess(id: string): void;
     removeFromQuickAccess(id: string): void;
     setRenamed(id: string): void;
     deleteFile(id: string): void;
+    setUploadedFilesCount(c: (c: number) => number): void;
     renamed: string;
     selected;
     router: Router
@@ -30,6 +32,19 @@ type State = {
         y: number,
         isVisible: boolean,
         fileId: string
+    },
+    selection: {
+        active: boolean,
+        originX: number,
+        originY: number,
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        elements: {
+            from: number,
+            to: number
+        }
     }
 }
 
@@ -52,6 +67,16 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                 isVisible: false,
                 x: 0,
                 y: 0
+            },
+            selection: {
+                active: false,
+                originX: 0,
+                originY: 0,
+                x: 0,
+                y: 0,
+                width: 0,
+                height: 0,
+                elements: { from: -1, to: 0 }
             }
         };
         this.handleFileDragEnd = this.handleFileDragEnd.bind(this);
@@ -80,23 +105,26 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                 fileEntry.file(async (file: File) => {
                     this.props.addFileUpload(<DriveUploadingFile
                         key={Date.now()}
-                        path={`/api/v1/drive/files/${folder}`}
+                        // path={`/api/v1/files/${folder}`}
+                        path = {`/api/v1/files`}
+                        parent={folder}
                         file={file}
-                        onFileUploaded={() => this.props.refreshfn()}
+                        onFileUploaded={() => {
+                            this.props.refreshfn();
+                            this.props.setUploadedFilesCount(c => c + 1);
+                        }}
                         onFileProgress={() => {
                         }}/>);
                 });
             } else {
                 const directory = entry as FileSystemDirectoryEntry;
-                const folderJson = await (await fetch(`/api/v1/drive/files/${folder}`, {
+                const fd = new FormData();
+                fd.append('name', directory.name);
+                fd.append('type', 'folder');
+                fd.append('parent', folder);
+                const folderJson = await (await fetch(`/api/v1/files`, {
                     method: 'POST',
-                    body: JSON.stringify({
-                        name: directory.name,
-                        directory: true
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    body: fd
                 })).json();
                 directory.createReader().readEntries(async (entries) => {
                     for (let entry of entries) {
@@ -141,10 +169,97 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
         });
     }
 
+    beginSelection = (e) => {
+        this.setState({
+            selection: {
+                active: true,
+                originX: e.clientX,
+                originY: e.clientY,
+                x: e.clientX,
+                y: e.clientY,
+                width: 0,
+                height: 0,
+                elements: { from: -1, to: 0 }
+            }
+        });
+        window.addEventListener('mouseup', this.mouseReleaseListener = (e) => {
+            this.stopSelection();
+        });
+        window.addEventListener('mousemove', this.mouseMoveListener = this.updateSelection);
+    };
+
+    private mouseReleaseListener;
+    private mouseMoveListener;
+
+    stopSelection = () => {
+        this.setState({
+            selection: {
+                active: false,
+                originX: 0, originY: 0, x: 0, y: 0, width: 0, height: 0,
+                elements: this.state.selection.elements
+            }
+        });
+        window.removeEventListener('mouseup', this.mouseReleaseListener);
+        window.removeEventListener('mousemove', this.mouseMoveListener);
+    };
+
+    clearSelection = () => {
+        this.setState({
+            selection: {
+                active: false,
+                originX: 0, originY: 0, x: 0, y: 0, width: 0, height: 0,
+                elements: {
+                    from: -1,
+                    to: 0
+                }
+            }
+        });
+    };
+
+    updateSelection = (e) => {
+        if (!this.state.selection.active)
+            return;
+
+        const xS = Math.min(e.clientX, this.state.selection.originX) - 324;
+        const yS = Math.min(e.clientY, this.state.selection.originY) - 98;
+
+        const xE = Math.max(e.clientX, this.state.selection.originX) - 324;
+        const yE = Math.max(e.clientY, this.state.selection.originY) - 98;
+
+        // Checks selected folders
+        let indexFrom = -1;
+        let indexTo = 0;
+        document.querySelectorAll(`.${style.filesSection} div:nth-child(2) table tbody tr`).forEach((it: Element & {offsetTop: number}, index) => {
+
+            if (yS <= it.offsetTop + 98 && yE >= it.offsetTop + 58) {
+                if (indexFrom === -1)
+                    indexFrom = index;
+
+                indexTo = index;
+            }
+
+        });
+
+        this.setState({
+            selection: {
+                ...this.state.selection,
+                x: xS,
+                y: yS,
+                width: xE - xS,
+                height: yE - yS,
+                elements: {
+                    from: indexFrom,
+                    to: indexTo
+                }
+            }
+        });
+    };
+
     render() {
         return (
             <div style={{height: 'calc(100% - 64px)', overflow: "auto"}} onDragEnter={this.handleFileDragEnter}
-                 onDragOver={e => e.preventDefault()} onDrop={this.handleFileDrop} onDragLeave={this.handleFileDragEnd}>
+                 onMouseDown={this.beginSelection} onDragOver={e => e.preventDefault()}
+                 onDrop={this.handleFileDrop} onDragLeave={this.handleFileDragEnd}>
                 {this.state.dragAndDrop && <div className={style.filesDnD}>
                     <p>Drag and drop your files here.</p>
                 </div>}
@@ -182,26 +297,42 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                             ...this.props.files.sort((a: FileDetails, b: FileDetails) => {
                                 return a.name.localeCompare(b.name);
                             }),
-                        ].map((object) => {
+                        ].map((object, index) => {
+                            const isSelected = this.state.selection.elements.from !== -1 &&
+                                this.state.selection.elements.from <= index && this.state.selection.elements.to >= index;
+
                             return <DriveContentsItem
                                 key={object.id}
                                 id={object.id}
                                 name={object.name}
                                 extension={object.extension}
-                                selected={this.props.selected}
+                                selected={isSelected}
                                 renamed={this.props.renamed}
                                 setRenamed={this.props.setRenamed}
+                                rename={this.props.rename}
                                 owner={object.owner}
                                 size={object.size}
                                 directory={object.directory}
-                                openDirectory={object.directory ? this.props.openDirectory : () => {
+                                openDirectory={async (path: string) => {
+                                    this.clearSelection();
+                                    this.closeContextMenu();
+                                    if (object.directory)
+                                        await this.props.openDirectory(path);
                                 }}
                                 createContextMenu={this.createContextMenu}
-                                birth_time={object.birth_time}
+                                creation_time={object.creation_time}
+                                last_modified={object.last_modified}
                                 focus={() => {
                                     this.setState({
                                         context: {
                                             isVisible: false, x: 0, y: 0, fileId: undefined
+                                        },
+                                        selection: {
+                                            ...this.state.selection,
+                                            elements: {
+                                                from: index,
+                                                to: index
+                                            }
                                         }
                                     });
                                     this.props.focus(object.id);
@@ -209,8 +340,18 @@ export default withRouter(class DriveContentsFiles extends React.Component<Props
                             />
                         })
                     }
+                    {this.state.selection.active &&
+                    <div className={style.selectionRect} style={
+                        {
+                            left: this.state.selection.x + 'px',
+                            top: this.state.selection.y + 'px',
+                            width: this.state.selection.width + 'px',
+                            height: this.state.selection.height + 'px'
+                        }
+                    }/>}
                     </tbody>
                 </table>
+
             </div>
         );
     }

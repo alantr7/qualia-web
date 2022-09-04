@@ -8,14 +8,19 @@ import DriveUploadingFile from "./DriveUploadingFile";
 type Props = {
     uploads: DriveUploadingFile[]
     router,
+    uploadedCount: number,
+    clearUploads(): void,
     refreshfn(): void,
-    addFileUpload(file: ReactElement): void
+    addFileUpload(file: ReactElement): void,
+    setUploadedFilesCount(c: (c: number) => number): void
 }
 
 type State = {
     name: string;
     progress: number;
+    minimized: boolean;
     visible: boolean;
+    closed: boolean;
     time: number
 }
 
@@ -29,8 +34,10 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
         this.state = {
             name: '',
             progress: 0,
-            visible: true,
-            time: 0
+            minimized: false,
+            time: 0,
+            visible: false,
+            closed: false
         };
     }
 
@@ -40,6 +47,7 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
                 key={Date.now()}
                 onFileUploaded={() => {
                     this.props.refreshfn();
+                    this.props.setUploadedFilesCount(c => c + 1);
                 }}
                 onFileProgress={(loaded, total) => {
                     this.setState({
@@ -47,7 +55,8 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
                     });
                 }}
                 file={file}
-                path={`/api/v1/drive/files/${this.props.router.query.folder ? this.props.router.query.folder : 'root'}`}/>);
+                parent={this.props.router.folder ? this.props.router.folder : 'root'}
+                path={`/api/v1/files`}/>);
 
         this.props.addFileUpload(upload);
         console.log(file);
@@ -69,12 +78,43 @@ export default withRouter(class DriveUploadingContainer extends React.Component<
         fileInput.click();
     }
 
+    closeContainer = () => {
+        this.props.clearUploads();
+        this.setState({
+            closed: true
+        });
+    };
+
+    componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>, snapshot?: any): void {
+        if (this.props.uploads.length > 0 && (!prevState.visible || prevState.closed)) {
+            this.setState({
+                visible: true,
+                closed: false
+            })
+        }
+    }
+
     render() {
+        const isUploadCompleted = this.props.uploadedCount === this.props.uploads.length;
         return (
             <>
                 <div id="uploading-files" style={{display: "none"}} onClick={this.upload}/>
-                <div className={style.container + ' ' + (this.state.visible ? style.visible : '')}>
-                    {this.props.uploads.map(a => a)}
+                <div
+                    className={style.container + ' ' + (this.state.visible ? style.visible : '') + ' ' + (this.state.closed ? style.closed : '') + ' ' + (this.state.minimized ? style.minimized : '')}>
+                    <p className={style.containerTitle} onClick={_ => this.setState({
+                        minimized: !this.state.minimized
+                    })}>
+                        {!isUploadCompleted && `Uploading files... (${this.props.uploadedCount} of ${this.props.uploads.length})`}
+                        {isUploadCompleted && `All files are uploaded (${this.props.uploadedCount})`}
+
+                        {isUploadCompleted && <span className={style.closeContainer} onClick={e => {
+                            e.stopPropagation();
+                            this.closeContainer();
+                        }} />}
+                    </p>
+                    <div className={style.uploads}>
+                        {this.props.uploads.map(a => a)}
+                    </div>
                 </div>
             </>
         );

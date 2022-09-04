@@ -1,9 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {getUser} from "../../../../lib/get-user";
-import {Database} from "../../../../lib/database";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-
+/*
     const user = await getUser(req, res);
 
     if (!user) {
@@ -45,6 +43,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     else
     {
         res.status(404).end()
-    }
+    }*/
 
 }

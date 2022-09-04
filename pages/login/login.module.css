@@ -50,6 +50,12 @@
   transition: background-color 0.3s, color 0.3s;
   color: black;
 }
+.loginForm .inputRow input[type=email]::-moz-placeholder, .loginForm .inputRow input[type=password]::-moz-placeholder {
+  color: #090909;
+}
+.loginForm .inputRow input[type=email]:-ms-input-placeholder, .loginForm .inputRow input[type=password]:-ms-input-placeholder {
+  color: #090909;
+}
 .loginForm .inputRow input[type=email]::placeholder, .loginForm .inputRow input[type=password]::placeholder {
   color: #090909;
 }
@@ -85,6 +91,4 @@
 }
 .loginForm button:hover {
   background-color: #7a7a7a;
-}
-
-/*# sourceMappingURL=login.module.css.map */
+}/*# sourceMappingURL=login.module.css.map */

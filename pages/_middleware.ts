@@ -1,8 +1,12 @@
 import {NextFetchEvent, NextRequest, NextResponse} from "next/server";
 
 export default async function middleware(req: NextRequest, evt: NextFetchEvent) {
-
+/*
     let res = NextResponse.next();
+
+    if (req.nextUrl.pathname === '/sign-in') {
+        return res;
+    }
 
     const response = await fetch('/api/auth/get_user', {
         headers: {
@@ -31,6 +35,8 @@ export default async function middleware(req: NextRequest, evt: NextFetchEvent) 
         }
     }
 
-    return res;
+    return res;*/
+
+    return NextResponse.next();
 
 }

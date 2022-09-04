@@ -1,67 +1,164 @@
 .container {
   position: fixed;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-  width: 420px;
+  width: 350px;
   right: 32px;
+  bottom: 32px;
+  transition: transform 0.3s, opacity 0.3s, width 0.3s;
+  display: none;
+  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.container.closed {
+  -webkit-animation: animContainerClose 0.3s forwards !important;
+          animation: animContainerClose 0.3s forwards !important;
+}
+@-webkit-keyframes animContainerClose {
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+@keyframes animContainerClose {
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+.container .containerTitle {
+  color: #5785FB;
+  margin: 0;
+  background-color: white;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(87, 133, 251, 0.1);
+  font-weight: bold;
+}
+.container .containerTitle:hover {
+  background-color: rgb(248, 248, 248);
+}
+.container .containerTitle:active {
+  background-color: rgb(238, 238, 238);
+}
+.container .containerTitle .closeContainer {
+  position: absolute;
+  right: 20px;
+  top: 11px;
+  display: block;
+  padding: 11px;
+  background-image: url(../../../public/images/x-mark-32.png);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.container .containerTitle .closeContainer:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.container .containerTitle .closeContainer:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.container.visible {
+  transform: translateY(0);
+  display: block;
+  -webkit-animation: animContainerOpen 0.3s;
+          animation: animContainerOpen 0.3s;
+}
+@-webkit-keyframes animContainerOpen {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes animContainerOpen {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.container .uploads {
   padding: 8px;
-  bottom: 64px;
-  transition: transform 0.3s, opacity 0.3s;
+  height: 420px;
+  overflow-y: auto;
+  background-color: white;
+  opacity: 1;
+  transition: height 0.2s ease-out, opacity 0.15s;
+}
+.container.minimized {
+  width: 400px;
+}
+.container.minimized .containerTitle {
+  text-align: left;
+  padding-left: 40px;
+}
+.container.minimized .uploads {
+  height: 0;
+  padding: 0;
+  opacity: 0;
 }
 .container .file {
   position: relative;
-  height: 60px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.03);
+  margin: 4px 0;
+  border-radius: 8px;
+  padding: 4px;
 }
-.container .file.visible {
-  transform: translateY(0);
-  opacity: 1;
+.container .file:first-child {
+  margin-top: 0;
 }
 .container .file .title {
   float: left;
-  width: 300px;
-  margin-left: 64px;
-  font-size: 17px;
+  margin-left: 54px;
+  font-size: 16px;
   color: black;
 }
-.container .file .currentFile {
+.container .file .uploadProgress {
   float: left;
-  margin-left: 64px;
-  color: #555555;
-  font-size: 14px;
+  margin-left: 54px;
+  font-size: 12px;
+  color: #6D6D6D;
 }
-.container .file .fileIcon {
-  position: absolute;
-  left: 10px;
-  top: 4px;
-  width: 44px;
-  height: 46px;
-  background-color: #C4C4C4;
-}
-.container .file .percentage {
+.container .file .percentageContainer {
   position: absolute;
   color: #3E3E3E;
-  top: 12px;
-  right: 16px;
-  font-size: 24px;
+  top: 6px;
+  left: 12px;
+  font-size: 14px;
 }
-.container .file .progressBarContainer {
-  float: left;
-  margin-left: 64px;
+.container .file .percentageContainer svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(-90deg);
+  stroke-dasharray: 251; /* (2PI * 40px) */
+  stroke-dashoffset: 111;
 }
-.container .file .progressBarContainer .progressBarBackground {
-  position: relative;
-  display: block;
-  width: 348px;
-  margin: 4px 0;
-  height: 4px;
-  background-color: #C4C4C4;
-}
-.container .file .progressBarContainer .progressBar {
-  background-color: #5785FB;
-  display: block;
-  width: 0;
-  height: 4px;
-  margin: 0;
-  transition: width 0.3s;
-}
-
-/*# sourceMappingURL=DriveUploadingContainer.module.css.map */
+.container .file .percentageContainer .percentage {
+  font-size: 12px;
+  z-index: 2;
+  width: 38px;
+  text-align: center;
+  padding-top: 11px;
+}/*# sourceMappingURL=DriveUploadingContainer.module.css.map */
